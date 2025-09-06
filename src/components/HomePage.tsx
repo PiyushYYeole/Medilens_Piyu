@@ -164,13 +164,13 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
               <MessageSquare className="w-7 h-7 text-white" />
             </div>
             <h3 className="feature-title font-['Orbitron'] text-xl font-semibold text-[var(--text-primary)] mb-3">
-              AI Consultation
+              Ask Questions
             </h3>
             <p className="feature-description text-[var(--text-secondary)] leading-[1.6] mb-5">
-              Get instant AI-powered medical insights and recommendations for complex cases
+              Get instant answers about medications and health
             </p>
             <button className="feature-button p-[12px_24px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-[10px] font-semibold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(0,212,170,0.3)]">
-              Ask AI
+              Ask Question
             </button>
           </div>
         </div>
@@ -179,17 +179,17 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
         <div id="answers-section" className="answers-section bg-[var(--glass-bg)] backdrop-blur-[20px] border border-[var(--glass-border)] rounded-[20px] p-8">
           <div className="answers-header text-center mb-8">
             <h2 className="answers-title font-['Orbitron'] text-[1.8rem] font-semibold text-[var(--text-primary)] mb-2">
-              Recent AI Consultations
+              Recent Questions & Answers
             </h2>
             <p className="answers-subtitle text-[var(--text-secondary)]">
-              Your latest medical AI interactions and insights
+              Your latest health and medication questions
             </p>
           </div>
 
           <div className="answers-content max-h-[400px] overflow-y-auto py-5">
             {answers.length === 0 ? (
               <div className="no-answers text-center text-[var(--text-muted)] italic p-10">
-                No consultations yet. Start by asking the AI a medical question or uploading files for analysis.
+                No questions yet. Start by asking a health or medication question.
               </div>
             ) : (
               answers.map((answer) => (
