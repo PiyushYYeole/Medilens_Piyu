@@ -246,45 +246,24 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
             </div>
 
             <div className="features-list space-y-4 mb-8">
-              <div className="feature-item flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] transition-all duration-300">
-                <div className="feature-icon w-8 h-8 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--accent-teal)] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                  <Shield className="w-4 h-4 text-white" />
-                </div>
-                <div className="feature-content">
-                  <h4 className="feature-title font-semibold text-[var(--text-primary)] mb-1">Secure & Private</h4>
-                  <p className="feature-desc text-sm text-[var(--text-secondary)] leading-[1.5]">Your prescription data is encrypted and never shared</p>
-                </div>
-              </div>
-
-              <div className="feature-item flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] transition-all duration-300">
-                <div className="feature-icon w-8 h-8 bg-gradient-to-r from-[var(--accent-teal)] to-[var(--primary-purple)] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                  <Brain className="w-4 h-4 text-white" />
-                </div>
-                <div className="feature-content">
-                  <h4 className="feature-title font-semibold text-[var(--text-primary)] mb-1">Expert Verified</h4>
-                  <p className="feature-desc text-sm text-[var(--text-secondary)] leading-[1.5]">All medicine information verified by licensed pharmacists</p>
-                </div>
-              </div>
-
-              <div className="feature-item flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] transition-all duration-300">
-                <div className="feature-icon w-8 h-8 bg-gradient-to-r from-[var(--primary-purple)] to-[var(--primary-cyan)] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                  <Zap className="w-4 h-4 text-white" />
-                </div>
-                <div className="feature-content">
-                  <h4 className="feature-title font-semibold text-[var(--text-primary)] mb-1">24/7 Available</h4>
-                  <p className="feature-desc text-sm text-[var(--text-secondary)] leading-[1.5]">Get medicine information anytime, anywhere, instantly</p>
-                </div>
-              </div>
-
-              <div className="feature-item flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] transition-all duration-300">
-                <div className="feature-icon w-8 h-8 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                  <FileText className="w-4 h-4 text-white" />
-                </div>
-                <div className="feature-content">
-                  <h4 className="feature-title font-semibold text-[var(--text-primary)] mb-1">Research-Based</h4>
-                  <p className="feature-desc text-sm text-[var(--text-secondary)] leading-[1.5]">Access medical research details from trusted sources for educational purposes</p>
-                </div>
-              </div>
+              <ul className="feature-list space-y-3 text-[var(--text-secondary)] leading-[1.6]">
+                <li className="flex items-start gap-3">
+                  <span className="text-[var(--primary-cyan)] font-bold text-lg mt-1">•</span>
+                  <span><strong className="text-[var(--text-primary)]">Secure & Private</strong> - Your prescription data is encrypted and never shared</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[var(--primary-cyan)] font-bold text-lg mt-1">•</span>
+                  <span><strong className="text-[var(--text-primary)]">Expert Verified</strong> - All medicine information verified by licensed pharmacists</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[var(--primary-cyan)] font-bold text-lg mt-1">•</span>
+                  <span><strong className="text-[var(--text-primary)]">24/7 Available</strong> - Get medicine information anytime, anywhere, instantly</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[var(--primary-cyan)] font-bold text-lg mt-1">•</span>
+                  <span><strong className="text-[var(--text-primary)]">Research-Based</strong> - Access medical research details from trusted sources for educational purposes</span>
+                </li>
+              </ul>
             </div>
 
             <div className="trust-indicator text-center p-4 bg-gradient-to-r from-[rgba(0,212,170,0.1)] to-[rgba(107,70,193,0.1)] rounded-xl border border-[rgba(0,212,170,0.2)]">
