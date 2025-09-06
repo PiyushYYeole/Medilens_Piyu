@@ -293,21 +293,21 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
         {/* Auth Form Container */}
         <div className="main-container bg-[var(--glass-bg)] backdrop-blur-[30px] border border-[var(--glass-border)] rounded-3xl p-10 w-full max-w-[500px] h-[700px] flex flex-col justify-center shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] animate-[containerGlow_0.8s_ease-out]">
           <div className="logo-section text-center mb-10">
-            <div className="mx-auto mb-6">
-              <MedicalLogo size={120} />
+            <div className="mx-auto mb-4">
+              <MedicalLogo size={80} />
             </div>
-            <h1 className="brand-title font-['Orbitron'] text-[3.2rem] font-bold bg-gradient-to-r from-[var(--primary-cyan)] via-[#4dd8c4] via-[#7d9ff7] to-[var(--primary-purple)] bg-clip-text text-transparent mb-3 tracking-[0.05em] animate-[titleGlow_3s_ease-in-out_infinite_alternate]">
+            <h1 className="brand-title font-['Orbitron'] text-[2.5rem] font-bold bg-gradient-to-r from-[var(--primary-cyan)] via-[#4dd8c4] via-[#7d9ff7] to-[var(--primary-purple)] bg-clip-text text-transparent mb-2 tracking-[0.05em] animate-[titleGlow_3s_ease-in-out_infinite_alternate] break-words">
               MediLens
             </h1>
-            <p className="brand-subtitle font-['Space_Grotesk'] text-[var(--text-secondary)] text-lg font-medium mb-8 tracking-[0.03em] uppercase">
+            <p className="brand-subtitle font-['Space_Grotesk'] text-[var(--text-secondary)] text-base font-medium mb-6 tracking-[0.03em] uppercase break-words">
               Clarity • Innovation • Care
             </p>
           </div>
 
           {activeTab !== 'reset' && (
-            <div className="auth-tabs grid grid-cols-2 bg-[rgba(255,255,255,0.05)] rounded-2xl p-1 mb-8 relative">
+            <div className="auth-tabs grid grid-cols-2 bg-[rgba(255,255,255,0.05)] rounded-2xl p-1 mb-6 relative">
               <div
-                className={`auth-tab p-4 text-center rounded-xl cursor-pointer transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] font-['Space_Grotesk'] font-semibold text-sm tracking-[0.02em] uppercase relative z-[2] ${
+                className={`auth-tab p-3 text-center rounded-xl cursor-pointer transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] font-['Space_Grotesk'] font-semibold text-sm tracking-[0.02em] uppercase relative z-[2] ${
                   activeTab === 'login'
                     ? 'bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white shadow-[0_8px_25px_rgba(0,212,170,0.3)] transform -translate-y-[1px]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[rgba(255,255,255,0.08)]'
@@ -317,7 +317,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                 LOGIN
               </div>
               <div
-                className={`auth-tab p-4 text-center rounded-xl cursor-pointer transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] font-['Space_Grotesk'] font-semibold text-sm tracking-[0.02em] uppercase relative z-[2] ${
+                className={`auth-tab p-3 text-center rounded-xl cursor-pointer transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] font-['Space_Grotesk'] font-semibold text-sm tracking-[0.02em] uppercase relative z-[2] ${
                   activeTab === 'signup'
                     ? 'bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white shadow-[0_8px_25px_rgba(0,212,170,0.3)] transform -translate-y-[1px]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[rgba(255,255,255,0.08)]'
@@ -330,10 +330,10 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
           )}
 
           {activeTab === 'reset' && (
-            <div className="reset-header text-center mb-6">
+            <div className="reset-header text-center mb-4">
               <button
                 onClick={() => setActiveTab('login')}
-                className="back-button text-[var(--primary-cyan)] text-sm hover:text-[var(--text-primary)] transition-colors duration-200 mb-4"
+                className="back-button text-[var(--primary-cyan)] text-sm hover:text-[var(--text-primary)] transition-colors duration-200 mb-2"
               >
                 ← Back to Login
               </button>
@@ -363,43 +363,43 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
           )}
 
           <form className="auth-form animate-[slideIn_0.4s_cubic-bezier(0.4,0,0.2,1)]" onSubmit={handleSubmit}>
-            <div className="tab-header text-center mb-6">
-              <h2 className="tab-title font-['Orbitron'] text-[var(--text-primary)] text-2xl font-semibold mb-2 tracking-[0.02em]">
+            <div className="tab-header text-center mb-4">
+              <h2 className="tab-title font-['Orbitron'] text-[var(--text-primary)] text-xl font-semibold mb-1 tracking-[0.02em] break-words">
                 {getTabTitle()}
               </h2>
-              <p className="tab-subtitle font-['Space_Grotesk'] text-[var(--text-secondary)] text-sm font-normal tracking-[0.01em]">
+              <p className="tab-subtitle font-['Space_Grotesk'] text-[var(--text-secondary)] text-xs font-normal tracking-[0.01em] break-words">
                 {getTabSubtitle()}
               </p>
             </div>
 
             {(activeTab === 'signup') && (
-              <div className="form-group mb-[18px]">
+              <div className="form-group mb-4">
                 <input
                   type="text"
                   name="name"
-                  className="form-input w-full p-[14px_16px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
+                  className="form-input w-full p-3 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
                   placeholder="Full Name"
                   required
                 />
               </div>
             )}
 
-            <div className="form-group mb-[18px]">
+            <div className="form-group mb-4">
               <input
                 type="email"
                 name="email"
-                className="form-input w-full p-[14px_16px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
+                className="form-input w-full p-3 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
                 placeholder="Email Address"
                 required
               />
             </div>
 
-            <div className="form-group mb-[18px]">
+            <div className="form-group mb-4">
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
-                  className="form-input w-full p-[14px_16px] pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
+                  className="form-input w-full p-3 pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
                   placeholder={activeTab === 'reset' ? 'New Password' : 'Password'}
                   required
                 />
@@ -418,12 +418,12 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
             </div>
 
             {(activeTab === 'signup' || activeTab === 'reset') && (
-              <div className="form-group mb-[18px]">
+              <div className="form-group mb-4">
                 <div className="relative">
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     name="confirmPassword"
-                    className="form-input w-full p-[14px_16px] pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
+                    className="form-input w-full p-3 pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
                     placeholder="Confirm Password"
                     required
                   />
@@ -455,7 +455,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
             )}
 
             {activeTab === 'signup' && (
-              <div className="terms-checkbox mb-[18px]">
+              <div className="terms-checkbox mb-4">
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
@@ -463,7 +463,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                     onChange={(e) => setAcceptedTerms(e.target.checked)}
                     className="mt-1 w-4 h-4 text-[var(--primary-cyan)] bg-[rgba(255,255,255,0.08)] border border-[var(--glass-border)] rounded focus:ring-[var(--primary-cyan)] focus:ring-2"
                   />
-                  <span className="text-sm text-[var(--text-secondary)] leading-[1.4]">
+                  <span className="text-xs text-[var(--text-secondary)] leading-[1.4] break-words">
                     I agree to the{' '}
                     <button
                       type="button"
@@ -480,7 +480,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
             <button
               type="submit"
               disabled={isLoading || (activeTab === 'signup' && !acceptedTerms)}
-              className="auth-button w-full p-4 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-xl font-['Space_Grotesk'] text-base font-bold tracking-[0.05em] uppercase cursor-pointer transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] mt-2 relative overflow-hidden hover:transform hover:-translate-y-[2px] hover:shadow-[0_15px_40px_rgba(0,212,170,0.4)] active:transform active:translate-y-0 before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(255,255,255,0.2)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              className="auth-button w-full p-3 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-xl font-['Space_Grotesk'] text-sm font-bold tracking-[0.05em] uppercase cursor-pointer transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] mt-2 relative overflow-hidden hover:transform hover:-translate-y-[2px] hover:shadow-[0_15px_40px_rgba(0,212,170,0.4)] active:transform active:translate-y-0 before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(255,255,255,0.2)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
               {activeTab === 'login' && 'LOG IN'}
               {activeTab === 'signup' && 'CREATE ACCOUNT'}
@@ -494,7 +494,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
               {activeTab === 'login' && (
                 <a
                   href="#"
-                  className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-sm transition-colors duration-200 hover:text-[var(--text-primary)]"
+                  className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-xs transition-colors duration-200 hover:text-[var(--text-primary)]"
                   onClick={(e) => {
                     e.preventDefault();
                     handleForgotPassword();
@@ -506,7 +506,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
               {activeTab === 'signup' && (
                 <a
                   href="#"
-                  className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-sm transition-colors duration-200 hover:text-[var(--text-primary)]"
+                  className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-xs transition-colors duration-200 hover:text-[var(--text-primary)]"
                   onClick={(e) => {
                     e.preventDefault();
                     setActiveTab('login');
