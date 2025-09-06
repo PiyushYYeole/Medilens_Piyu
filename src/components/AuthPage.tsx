@@ -404,6 +404,8 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                 <input
                   type="text"
                   name="name"
+                  value={formData.name}
+                  onChange={(e) => handleInputChange('name', e.target.value)}
                   className="form-input w-full p-3 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
                   placeholder="Full Name"
                   required
@@ -415,6 +417,8 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
               <input
                 type="email"
                 name="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
                 className="form-input w-full p-3 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
                 placeholder="Email Address"
                 required
@@ -426,6 +430,8 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
+                  value={formData.password}
+                  onChange={(e) => handleInputChange('password', e.target.value)}
                   className="form-input w-full p-3 pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
                   placeholder={activeTab === 'reset' ? 'New Password' : 'Password'}
                   required
@@ -450,6 +456,8 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
                     className="form-input w-full p-3 pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
                     placeholder="Confirm Password"
                     required
@@ -536,7 +544,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                   className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-xs transition-colors duration-200 hover:text-[var(--text-primary)]"
                   onClick={(e) => {
                     e.preventDefault();
-                    setActiveTab('login');
+                    handleTabChange('login');
                   }}
                 >
                   Already have an account? Log in
