@@ -10,6 +10,7 @@ import WelcomeModal from './WelcomeModal';
 interface HomePageProps {
   user: User;
   onLogout: () => void;
+  onNavigateToChatbot: (context: 'upload' | 'medicine-search' | 'question') => void;
 }
 
 interface Answer {
@@ -19,30 +20,20 @@ interface Answer {
   timestamp: Date;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
+const HomePage: React.FC<HomePageProps> = ({ user, onLogout, onNavigateToChatbot }) => {
   const [answers, setAnswers] = useState<Answer[]>([]);
-  const [activeModal, setActiveModal] = useState<string | null>(null);
   const [showTutorial, setShowTutorial] = useState(true);
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
   const [welcomeSkipped, setWelcomeSkipped] = useState(false);
 
   const handleFeatureClick = (feature: string) => {
-    setActiveModal(feature);
-  };
-
-  const handleAskQuestion = (question: string) => {
-    // Simulate AI response
-    const response = `Based on your query about "${question}", our AI analysis suggests comprehensive evaluation and monitoring. This is a simulated response for demonstration purposes.`;
-    
-    const newAnswer: Answer = {
-      id: Date.now().toString(),
-      question,
-      response,
-      timestamp: new Date()
-    };
-
-    setAnswers(prev => [newAnswer, ...prev]);
-    setActiveModal(null);
+    if (feature === 'upload') {
+      onNavigateToChatbot('upload');
+    } else if (feature === 'medicine-search') {
+      onNavigateToChatbot('medicine-search');
+    } else if (feature === 'question') {
+      onNavigateToChatbot('question');
+    }
   };
 
   const handleTutorialComplete = () => {
@@ -132,7 +123,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
               Securely upload your doctor's prescription and get AI-powered insights and analysis
             </p>
             <button className="feature-button p-[12px_24px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-[10px] font-semibold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(0,212,170,0.3)]">
-              Upload Prescription
+              Start Analysis
             </button>
           </div>
 
@@ -151,7 +142,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
               Search for detailed medicine information including usage, dosage, side effects, and interactions from trusted medical databases
             </p>
             <button className="feature-button p-[12px_24px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-[10px] font-semibold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(0,212,170,0.3)]">
-              Search Medicine
+              Search Now
             </button>
           </div>
 
@@ -170,7 +161,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
               Get instant answers about medications and health
             </p>
             <button className="feature-button p-[12px_24px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-[10px] font-semibold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(0,212,170,0.3)]">
-              Ask Question
+              Ask Now
             </button>
           </div>
         </div>
@@ -209,29 +200,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
           </div>
         </div>
       </div>
-
-      {/* Modals */}
-      <Modal
-        isOpen={activeModal === 'upload'}
-        onClose={() => setActiveModal(null)}
-        title="Upload Medical Files"
-        type="upload"
-      />
-
-      <Modal
-        isOpen={activeModal === 'medicine-search'}
-        onClose={() => setActiveModal(null)}
-        title="Search Medicine Information"
-        type="medicine-search"
-      />
-
-      <Modal
-        isOpen={activeModal === 'question'}
-        onClose={() => setActiveModal(null)}
-        title="AI Medical Consultation"
-        type="question"
-        onSubmit={handleAskQuestion}
-      />
 
       {/* Interactive Tutorial */}
       {!showWelcomeModal && (
