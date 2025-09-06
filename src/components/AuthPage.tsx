@@ -297,147 +297,123 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
 
         {/* Auth Form Container */}
         <div className="main-container bg-[var(--glass-bg)] backdrop-blur-[30px] border border-[var(--glass-border)] rounded-3xl p-10 w-full max-w-[450px] shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] animate-[containerGlow_0.8s_ease-out]">
-        <div className="logo-section text-center mb-10">
-          <div className="mx-auto mb-6">
-            <MedicalLogo size={120} />
-          </div>
-          <h1 className="brand-title font-['Orbitron'] text-[3.2rem] font-bold bg-gradient-to-r from-[var(--primary-cyan)] via-[#4dd8c4] via-[#7d9ff7] to-[var(--primary-purple)] bg-clip-text text-transparent mb-3 tracking-[0.05em] animate-[titleGlow_3s_ease-in-out_infinite_alternate]">
-            MediLens
-          </h1>
-          <p className="brand-subtitle font-['Space_Grotesk'] text-[var(--text-secondary)] text-lg font-medium mb-8 tracking-[0.03em] uppercase">
-            Clarity • Innovation • Care
-          </p>
-        </div>
-
-        {activeTab !== 'reset' && (
-          <div className="auth-tabs grid grid-cols-2 bg-[rgba(255,255,255,0.05)] rounded-2xl p-1 mb-8 relative">
-            <div
-              className={`auth-tab p-4 text-center rounded-xl cursor-pointer transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] font-['Space_Grotesk'] font-semibold text-sm tracking-[0.02em] uppercase relative z-[2] ${
-                activeTab === 'login'
-                  ? 'bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white shadow-[0_8px_25px_rgba(0,212,170,0.3)] transform -translate-y-[1px]'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[rgba(255,255,255,0.08)]'
-              }`}
-              onClick={() => setActiveTab('login')}
-            >
-              LOGIN
+          <div className="logo-section text-center mb-10">
+            <div className="mx-auto mb-6">
+              <MedicalLogo size={120} />
             </div>
-            <div
-              className={`auth-tab p-4 text-center rounded-xl cursor-pointer transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] font-['Space_Grotesk'] font-semibold text-sm tracking-[0.02em] uppercase relative z-[2] ${
-                activeTab === 'signup'
-                  ? 'bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white shadow-[0_8px_25px_rgba(0,212,170,0.3)] transform -translate-y-[1px]'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[rgba(255,255,255,0.08)]'
-              }`}
-              onClick={() => setActiveTab('signup')}
-            >
-              SIGN UP
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'reset' && (
-          <div className="reset-header text-center mb-6">
-            <button
-              onClick={() => setActiveTab('login')}
-              className="back-button text-[var(--primary-cyan)] text-sm hover:text-[var(--text-primary)] transition-colors duration-200 mb-4"
-            >
-              ← Back to Login
-            </button>
-          </div>
-        )}
-
-        {showSuccess && (
-          <div className="success-message bg-[rgba(0,212,170,0.1)] border border-[rgba(0,212,170,0.3)] rounded-xl p-3 text-[var(--primary-cyan)] text-sm mb-5 text-center">
-            {successMessage}
-          </div>
-        )}
-
-        {showError && (
-          <div className="error-message bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.3)] rounded-xl p-3 text-[#ef4444] text-sm mb-5 text-center">
-            {errorMessage}
-            {errorMessage === 'Invalid username or password' && (
-              <div className="mt-2">
-                <button
-                  onClick={handleForgotPassword}
-                  className="text-[var(--primary-cyan)] hover:text-[var(--text-primary)] transition-colors duration-200 text-xs underline"
-                >
-                  Reset Password
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        <form className="auth-form animate-[slideIn_0.4s_cubic-bezier(0.4,0,0.2,1)]" onSubmit={handleSubmit}>
-          <div className="tab-header text-center mb-6">
-            <h2 className="tab-title font-['Orbitron'] text-[var(--text-primary)] text-2xl font-semibold mb-2 tracking-[0.02em]">
-              {getTabTitle()}
-            </h2>
-            <p className="tab-subtitle font-['Space_Grotesk'] text-[var(--text-secondary)] text-sm font-normal tracking-[0.01em]">
-              {getTabSubtitle()}
+            <h1 className="brand-title font-['Orbitron'] text-[3.2rem] font-bold bg-gradient-to-r from-[var(--primary-cyan)] via-[#4dd8c4] via-[#7d9ff7] to-[var(--primary-purple)] bg-clip-text text-transparent mb-3 tracking-[0.05em] animate-[titleGlow_3s_ease-in-out_infinite_alternate]">
+              MediLens
+            </h1>
+            <p className="brand-subtitle font-['Space_Grotesk'] text-[var(--text-secondary)] text-lg font-medium mb-8 tracking-[0.03em] uppercase">
+              Clarity • Innovation • Care
             </p>
           </div>
 
-          {(activeTab === 'signup') && (
-            <div className="form-group mb-[18px]">
-              <input
-                type="text"
-                name="name"
-                className="form-input w-full p-[14px_16px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
-                placeholder="Full Name"
-                required
-              />
+          {activeTab !== 'reset' && (
+            <div className="auth-tabs grid grid-cols-2 bg-[rgba(255,255,255,0.05)] rounded-2xl p-1 mb-8 relative">
+              <div
+                className={`auth-tab p-4 text-center rounded-xl cursor-pointer transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] font-['Space_Grotesk'] font-semibold text-sm tracking-[0.02em] uppercase relative z-[2] ${
+                  activeTab === 'login'
+                    ? 'bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white shadow-[0_8px_25px_rgba(0,212,170,0.3)] transform -translate-y-[1px]'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[rgba(255,255,255,0.08)]'
+                }`}
+                onClick={() => setActiveTab('login')}
+              >
+                LOGIN
+              </div>
+              <div
+                className={`auth-tab p-4 text-center rounded-xl cursor-pointer transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] font-['Space_Grotesk'] font-semibold text-sm tracking-[0.02em] uppercase relative z-[2] ${
+                  activeTab === 'signup'
+                    ? 'bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white shadow-[0_8px_25px_rgba(0,212,170,0.3)] transform -translate-y-[1px]'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[rgba(255,255,255,0.08)]'
+                }`}
+                onClick={() => setActiveTab('signup')}
+              >
+                SIGN UP
+              </div>
             </div>
           )}
 
-          <div className="form-group mb-[18px]">
-            <input
-              type="email"
-              name="email"
-              className="form-input w-full p-[14px_16px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
-              placeholder="Email Address"
-              required
-            />
-          </div>
-
-          <div className="form-group mb-[18px]">
-            <div className="relative">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                className="form-input w-full p-[14px_16px] pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
-                placeholder={activeTab === 'reset' ? 'New Password' : 'Password'}
-                required
-              />
+          {activeTab === 'reset' && (
+            <div className="reset-header text-center mb-6">
               <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200 p-1"
+                onClick={() => setActiveTab('login')}
+                className="back-button text-[var(--primary-cyan)] text-sm hover:text-[var(--text-primary)] transition-colors duration-200 mb-4"
               >
-                {showPassword ? (
-                  <EyeOff className="w-4 h-4" />
-                ) : (
-                  <Eye className="w-4 h-4" />
-                )}
+                ← Back to Login
               </button>
             </div>
-          </div>
+          )}
 
-          {(activeTab === 'signup' || activeTab === 'reset') && (
+          {showSuccess && (
+            <div className="success-message bg-[rgba(0,212,170,0.1)] border border-[rgba(0,212,170,0.3)] rounded-xl p-3 text-[var(--primary-cyan)] text-sm mb-5 text-center">
+              {successMessage}
+            </div>
+          )}
+
+          {showError && (
+            <div className="error-message bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.3)] rounded-xl p-3 text-[#ef4444] text-sm mb-5 text-center">
+              {errorMessage}
+              {errorMessage === 'Invalid username or password' && (
+                <div className="mt-2">
+                  <button
+                    onClick={handleForgotPassword}
+                    className="text-[var(--primary-cyan)] hover:text-[var(--text-primary)] transition-colors duration-200 text-xs underline"
+                  >
+                    Reset Password
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          <form className="auth-form animate-[slideIn_0.4s_cubic-bezier(0.4,0,0.2,1)]" onSubmit={handleSubmit}>
+            <div className="tab-header text-center mb-6">
+              <h2 className="tab-title font-['Orbitron'] text-[var(--text-primary)] text-2xl font-semibold mb-2 tracking-[0.02em]">
+                {getTabTitle()}
+              </h2>
+              <p className="tab-subtitle font-['Space_Grotesk'] text-[var(--text-secondary)] text-sm font-normal tracking-[0.01em]">
+                {getTabSubtitle()}
+              </p>
+            </div>
+
+            {(activeTab === 'signup') && (
+              <div className="form-group mb-[18px]">
+                <input
+                  type="text"
+                  name="name"
+                  className="form-input w-full p-[14px_16px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
+                  placeholder="Full Name"
+                  required
+                />
+              </div>
+            )}
+
+            <div className="form-group mb-[18px]">
+              <input
+                type="email"
+                name="email"
+                className="form-input w-full p-[14px_16px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
+                placeholder="Email Address"
+                required
+              />
+            </div>
+
             <div className="form-group mb-[18px]">
               <div className="relative">
                 <input
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  name="confirmPassword"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
                   className="form-input w-full p-[14px_16px] pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
-                  placeholder="Confirm Password"
+                  placeholder={activeTab === 'reset' ? 'New Password' : 'Password'}
                   required
                 />
                 <button
                   type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200 p-1"
                 >
-                  {showConfirmPassword ? (
+                  {showPassword ? (
                     <EyeOff className="w-4 h-4" />
                   ) : (
                     <Eye className="w-4 h-4" />
@@ -445,84 +421,108 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                 </button>
               </div>
             </div>
-          )}
 
-          {activeTab === 'signup' && (
-            <div className="password-requirements text-xs text-[var(--text-muted)] mb-4 p-3 bg-[rgba(255,255,255,0.05)] rounded-lg">
-              <p className="mb-1">Password must contain:</p>
-              <ul className="list-disc list-inside space-y-1">
-                <li>At least 6 characters</li>
-                <li>One uppercase letter</li>
-                <li>One lowercase letter</li>
-                <li>One number</li>
-              </ul>
-            </div>
-          )}
-
-          {activeTab === 'signup' && (
-            <div className="terms-checkbox mb-[18px]">
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={acceptedTerms}
-                  onChange={(e) => setAcceptedTerms(e.target.checked)}
-                  className="mt-1 w-4 h-4 text-[var(--primary-cyan)] bg-[rgba(255,255,255,0.08)] border border-[var(--glass-border)] rounded focus:ring-[var(--primary-cyan)] focus:ring-2"
-                />
-                <span className="text-sm text-[var(--text-secondary)] leading-[1.4]">
-                  I agree to the{' '}
+            {(activeTab === 'signup' || activeTab === 'reset') && (
+              <div className="form-group mb-[18px]">
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    name="confirmPassword"
+                    className="form-input w-full p-[14px_16px] pr-12 bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] rounded-xl text-[var(--text-primary)] text-sm transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] focus:bg-[rgba(255,255,255,0.12)]"
+                    placeholder="Confirm Password"
+                    required
+                  />
                   <button
                     type="button"
-                    onClick={() => setShowTermsModal(true)}
-                    className="text-[var(--primary-cyan)] hover:text-[var(--text-primary)] transition-colors duration-200 underline font-medium"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200 p-1"
                   >
-                    Terms & Conditions and Privacy Policy
+                    {showConfirmPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+                    )}
                   </button>
-                </span>
-              </label>
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={isLoading || (activeTab === 'signup' && !acceptedTerms)}
-            className="auth-button w-full p-4 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-xl font-['Space_Grotesk'] text-base font-bold tracking-[0.05em] uppercase cursor-pointer transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] mt-2 relative overflow-hidden hover:transform hover:-translate-y-[2px] hover:shadow-[0_15px_40px_rgba(0,212,170,0.4)] active:transform active:translate-y-0 before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(255,255,255,0.2)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-          >
-            {activeTab === 'login' && 'LOG IN'}
-            {activeTab === 'signup' && 'CREATE ACCOUNT'}
-            {activeTab === 'reset' && 'RESET PASSWORD'}
-            {isLoading && (
-              <div className="loading w-[18px] h-[18px] border-2 border-[rgba(255,255,255,0.3)] border-t-white rounded-full animate-spin ml-2"></div>
+                </div>
+              </div>
             )}
-          </button>
 
-          <div className="auth-footer text-center mt-6">
-            {activeTab === 'login' && (
-              <a
-                href="#"
-                className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-sm transition-colors duration-200 hover:text-[var(--text-primary)]"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleForgotPassword();
-                }}
-              >
-                Forgot your password?
-              </a>
-            )}
             {activeTab === 'signup' && (
-              <a
-                href="#"
-                className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-sm transition-colors duration-200 hover:text-[var(--text-primary)]"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveTab('login');
-                }}
-              >
-                Already have an account? Log in
-              </a>
+              <div className="password-requirements text-xs text-[var(--text-muted)] mb-4 p-3 bg-[rgba(255,255,255,0.05)] rounded-lg">
+                <p className="mb-1">Password must contain:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>At least 6 characters</li>
+                  <li>One uppercase letter</li>
+                  <li>One lowercase letter</li>
+                  <li>One number</li>
+                </ul>
+              </div>
             )}
-          </div>
-        </form>
-      </div>
+
+            {activeTab === 'signup' && (
+              <div className="terms-checkbox mb-[18px]">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={acceptedTerms}
+                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                    className="mt-1 w-4 h-4 text-[var(--primary-cyan)] bg-[rgba(255,255,255,0.08)] border border-[var(--glass-border)] rounded focus:ring-[var(--primary-cyan)] focus:ring-2"
+                  />
+                  <span className="text-sm text-[var(--text-secondary)] leading-[1.4]">
+                    I agree to the{' '}
+                    <button
+                      type="button"
+                      onClick={() => setShowTermsModal(true)}
+                      className="text-[var(--primary-cyan)] hover:text-[var(--text-primary)] transition-colors duration-200 underline font-medium"
+                    >
+                      Terms & Conditions and Privacy Policy
+                    </button>
+                  </span>
+                </label>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isLoading || (activeTab === 'signup' && !acceptedTerms)}
+              className="auth-button w-full p-4 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-xl font-['Space_Grotesk'] text-base font-bold tracking-[0.05em] uppercase cursor-pointer transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] mt-2 relative overflow-hidden hover:transform hover:-translate-y-[2px] hover:shadow-[0_15px_40px_rgba(0,212,170,0.4)] active:transform active:translate-y-0 before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(255,255,255,0.2)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            >
+              {activeTab === 'login' && 'LOG IN'}
+              {activeTab === 'signup' && 'CREATE ACCOUNT'}
+              {activeTab === 'reset' && 'RESET PASSWORD'}
+              {isLoading && (
+                <div className="loading w-[18px] h-[18px] border-2 border-[rgba(255,255,255,0.3)] border-t-white rounded-full animate-spin ml-2"></div>
+              )}
+            </button>
+
+            <div className="auth-footer text-center mt-6">
+              {activeTab === 'login' && (
+                <a
+                  href="#"
+                  className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-sm transition-colors duration-200 hover:text-[var(--text-primary)]"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleForgotPassword();
+                  }}
+                >
+                  Forgot your password?
+                </a>
+              )}
+              {activeTab === 'signup' && (
+                <a
+                  href="#"
+                  className="auth-link text-[var(--primary-cyan)] no-underline font-medium text-sm transition-colors duration-200 hover:text-[var(--text-primary)]"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveTab('login');
+                  }}
+                >
+                  Already have an account? Log in
+                </a>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
 
       {/* Terms & Conditions Modal */}
