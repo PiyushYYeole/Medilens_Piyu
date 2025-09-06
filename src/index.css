@@ -366,6 +366,58 @@ body {
 }
 
 /* Container animations */
+.auth-container {
+  animation: authContainerSlide 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes authContainerSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-panel {
+  animation: introPanelSlide 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes introPanelSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Responsive design for auth page */
+@media (max-width: 1024px) {
+  .auth-container {
+    justify-content: center;
+  }
+  
+  .intro-panel {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-container {
+    padding: 1rem;
+  }
+  
+  .main-container {
+    padding: 2rem !important;
+    max-width: 100% !important;
+  }
+}
+
 @keyframes containerGlow {
   from {
     opacity: 0;

@@ -3,7 +3,7 @@ import MedicalLogo from './MedicalLogo';
 import { User } from '../App';
 import ThemeToggle from './ThemeToggle';
 import TermsModal from './TermsModal';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Shield, Brain, Zap, FileText } from 'lucide-react';
 
 interface AuthPageProps {
   onLogin: (user: User) => void;
@@ -232,7 +232,71 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
         <ThemeToggle />
       </div>
       
-      <div className="main-container bg-[var(--glass-bg)] backdrop-blur-[30px] border border-[var(--glass-border)] rounded-3xl p-10 w-full max-w-[450px] shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] animate-[containerGlow_0.8s_ease-out]">
+      <div className="auth-container flex items-center justify-center gap-12 w-full max-w-[1200px]">
+        {/* Introduction Panel */}
+        <div className="intro-panel hidden lg:block bg-[var(--glass-bg)] backdrop-blur-[30px] border border-[var(--glass-border)] rounded-3xl p-10 w-full max-w-[500px] shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] animate-[containerGlow_0.8s_ease-out]">
+          <div className="intro-content">
+            <div className="intro-header mb-8">
+              <h2 className="intro-title font-['Orbitron'] text-[2rem] font-bold bg-gradient-to-r from-[var(--primary-cyan)] via-[#4dd8c4] to-[var(--primary-purple)] bg-clip-text text-transparent mb-4 tracking-[0.02em]">
+                Intelligent Healthcare Information Hub
+              </h2>
+              <p className="intro-description text-[var(--text-secondary)] text-base leading-[1.7] mb-6">
+                Upload your prescription photos or type medicine names to get detailed information, usage instructions, side effects, and safety guidelines. Make informed decisions about your healthcare with confidence.
+              </p>
+            </div>
+
+            <div className="features-list space-y-4 mb-8">
+              <div className="feature-item flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] transition-all duration-300">
+                <div className="feature-icon w-8 h-8 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--accent-teal)] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <Shield className="w-4 h-4 text-white" />
+                </div>
+                <div className="feature-content">
+                  <h4 className="feature-title font-semibold text-[var(--text-primary)] mb-1">Secure & Private</h4>
+                  <p className="feature-desc text-sm text-[var(--text-secondary)] leading-[1.5]">Your prescription data is encrypted and never shared</p>
+                </div>
+              </div>
+
+              <div className="feature-item flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] transition-all duration-300">
+                <div className="feature-icon w-8 h-8 bg-gradient-to-r from-[var(--accent-teal)] to-[var(--primary-purple)] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <Brain className="w-4 h-4 text-white" />
+                </div>
+                <div className="feature-content">
+                  <h4 className="feature-title font-semibold text-[var(--text-primary)] mb-1">Expert Verified</h4>
+                  <p className="feature-desc text-sm text-[var(--text-secondary)] leading-[1.5]">All medicine information verified by licensed pharmacists</p>
+                </div>
+              </div>
+
+              <div className="feature-item flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] transition-all duration-300">
+                <div className="feature-icon w-8 h-8 bg-gradient-to-r from-[var(--primary-purple)] to-[var(--primary-cyan)] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <Zap className="w-4 h-4 text-white" />
+                </div>
+                <div className="feature-content">
+                  <h4 className="feature-title font-semibold text-[var(--text-primary)] mb-1">24/7 Available</h4>
+                  <p className="feature-desc text-sm text-[var(--text-secondary)] leading-[1.5]">Get medicine information anytime, anywhere, instantly</p>
+                </div>
+              </div>
+
+              <div className="feature-item flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] transition-all duration-300">
+                <div className="feature-icon w-8 h-8 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <FileText className="w-4 h-4 text-white" />
+                </div>
+                <div className="feature-content">
+                  <h4 className="feature-title font-semibold text-[var(--text-primary)] mb-1">Research-Based</h4>
+                  <p className="feature-desc text-sm text-[var(--text-secondary)] leading-[1.5]">Access medical research details from trusted sources for educational purposes</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="trust-indicator text-center p-4 bg-gradient-to-r from-[rgba(0,212,170,0.1)] to-[rgba(107,70,193,0.1)] rounded-xl border border-[rgba(0,212,170,0.2)]">
+              <p className="trust-text font-semibold text-[var(--primary-cyan)] text-sm">
+                Trusted by over 100,000+ patients worldwide
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Auth Form Container */}
+        <div className="main-container bg-[var(--glass-bg)] backdrop-blur-[30px] border border-[var(--glass-border)] rounded-3xl p-10 w-full max-w-[450px] shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] animate-[containerGlow_0.8s_ease-out]">
         <div className="logo-section text-center mb-10">
           <div className="mx-auto mb-6">
             <MedicalLogo size={120} />
@@ -458,6 +522,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
             )}
           </div>
         </form>
+      </div>
       </div>
 
       {/* Terms & Conditions Modal */}
