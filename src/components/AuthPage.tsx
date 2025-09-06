@@ -17,6 +17,12 @@ interface StoredUser {
 
 const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
   const [activeTab, setActiveTab] = useState<'login' | 'signup' | 'reset'>('login');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    name: '',
+    confirmPassword: ''
+  });
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -26,6 +32,31 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Clear form data when switching tabs
+  const handleTabChange = (tab: 'login' | 'signup' | 'reset') => {
+    setActiveTab(tab);
+    setFormData({
+      email: '',
+      password: '',
+      name: '',
+      confirmPassword: ''
+    });
+    setShowError(false);
+    setShowSuccess(false);
+    setErrorMessage('');
+    setSuccessMessage('');
+    setShowPassword(false);
+    setShowConfirmPassword(false);
+  };
+
+  // Handle input changes
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
 
   // Get stored users from localStorage
   const getStoredUsers = (): StoredUser[] => {
@@ -87,11 +118,9 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
     setErrorMessage('');
     setSuccessMessage('');
 
-    const formData = new FormData(event.currentTarget);
-    const email = (formData.get('email') as string)?.trim();
-    const password = formData.get('password') as string;
-    const name = (formData.get('name') as string)?.trim();
-    const confirmPassword = formData.get('confirmPassword') as string;
+    const { email, password, name, confirmPassword } = formData;
+    const trimmedEmail = email.trim();
+    const trimmedName = name.trim();
 
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -104,11 +133,11 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
         }
 
         // Signup validation
-        if (!name || name.length < 2) {
+        if (!trimmedName || trimmedName.length < 2) {
           throw new Error('Name must be at least 2 characters long');
         }
 
-        if (!validateEmail(email)) {
+        if (!validateEmail(trimmedEmail)) {
           throw new Error('Please enter a valid email address');
         }
 
@@ -122,25 +151,25 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
         }
 
         // Check if user already exists
-        const existingUser = findUser(email);
+        const existingUser = findUser(trimmedEmail);
         if (existingUser) {
           throw new Error('An account with this email already exists');
         }
 
         // Create new user
-        const newUser: StoredUser = { email, name, password };
+        const newUser: StoredUser = { email: trimmedEmail, name: trimmedName, password };
         saveUser(newUser);
 
         setSuccessMessage('Account created successfully! You are now logged in.');
         setShowSuccess(true);
 
         setTimeout(() => {
-          onLogin({ email, name });
+          onLogin({ email: trimmedEmail, name: trimmedName });
         }, 1500);
 
       } else if (activeTab === 'login') {
         // Login validation
-        if (!validateEmail(email)) {
+        if (!validateEmail(trimmedEmail)) {
           throw new Error('Please enter a valid email address');
         }
 
@@ -149,7 +178,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
         }
 
         // Check credentials
-        const user = findUser(email);
+        const user = findUser(trimmedEmail);
         if (!user || user.password !== password) {
           throw new Error('Invalid username or password');
         }
@@ -163,11 +192,11 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
 
       } else if (activeTab === 'reset') {
         // Password reset
-        if (!validateEmail(email)) {
+        if (!validateEmail(trimmedEmail)) {
           throw new Error('Please enter a valid email address');
         }
 
-        const user = findUser(email);
+        const user = findUser(trimmedEmail);
         if (!user) {
           throw new Error('No account found with this email address');
         }
@@ -182,13 +211,13 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
         }
 
         // Update password
-        updateUserPassword(email, password);
+        updateUserPassword(trimmedEmail, password);
 
         setSuccessMessage('Password reset successfully! You can now log in with your new password.');
         setShowSuccess(true);
 
         setTimeout(() => {
-          setActiveTab('login');
+          handleTabChange('login');
           setShowSuccess(false);
         }, 2000);
       }
@@ -202,9 +231,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
   };
 
   const handleForgotPassword = () => {
-    setActiveTab('reset');
-    setShowError(false);
-    setShowSuccess(false);
+    handleTabChange('reset');
   };
 
   const getTabTitle = () => {
@@ -312,7 +339,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                     ? 'bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white shadow-[0_8px_25px_rgba(0,212,170,0.3)] transform -translate-y-[1px]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[rgba(255,255,255,0.08)]'
                 }`}
-                onClick={() => setActiveTab('login')}
+                onClick={() => handleTabChange('login')}
               >
                 LOGIN
               </div>
@@ -322,7 +349,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                     ? 'bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white shadow-[0_8px_25px_rgba(0,212,170,0.3)] transform -translate-y-[1px]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[rgba(255,255,255,0.08)]'
                 }`}
-                onClick={() => setActiveTab('signup')}
+                onClick={() => handleTabChange('signup')}
               >
                 SIGN UP
               </div>
@@ -332,7 +359,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
           {activeTab === 'reset' && (
             <div className="reset-header text-center mb-4">
               <button
-                onClick={() => setActiveTab('login')}
+                onClick={() => handleTabChange('login')}
                 className="back-button text-[var(--primary-cyan)] text-sm hover:text-[var(--text-primary)] transition-colors duration-200 mb-2"
               >
                 ← Back to Login
