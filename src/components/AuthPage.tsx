@@ -235,54 +235,54 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
       <div className="auth-container flex items-center justify-center gap-12 w-full max-w-[1200px]">
         {/* Introduction Panel */}
         <div className="intro-panel hidden lg:flex lg:flex-col lg:justify-center bg-[var(--glass-bg)] backdrop-blur-[30px] border border-[var(--glass-border)] rounded-3xl p-10 w-full max-w-[500px] h-[700px] shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] animate-[containerGlow_0.8s_ease-out]">
-          <div className="intro-content">
+          <div className="intro-content overflow-hidden">
             <div className="intro-header mb-8">
-              <h2 className="intro-title font-['Orbitron'] text-[2rem] font-bold bg-gradient-to-r from-[var(--primary-cyan)] via-[#4dd8c4] to-[var(--primary-purple)] bg-clip-text text-transparent mb-4 tracking-[0.02em]">
+              <h2 className="intro-title font-['Orbitron'] text-[1.75rem] font-bold bg-gradient-to-r from-[var(--primary-cyan)] via-[#4dd8c4] to-[var(--primary-purple)] bg-clip-text text-transparent mb-4 tracking-[0.02em] leading-tight break-words">
                 Intelligent Healthcare Information Hub
               </h2>
-              <p className="intro-description text-[var(--text-secondary)] text-base leading-[1.7] mb-6">
+              <p className="intro-description text-[var(--text-secondary)] text-sm leading-[1.6] mb-6 break-words">
                 Upload your prescription photos or type medicine names to get detailed information, usage instructions, side effects, and safety guidelines. Make informed decisions about your healthcare with confidence.
               </p>
             </div>
 
-            <div className="features-list space-y-4 mb-8">
-              <ul className="feature-list space-y-3 text-[var(--text-secondary)] leading-[1.6]">
+            <div className="features-list space-y-3 mb-6">
+              <ul className="feature-list space-y-2 text-[var(--text-secondary)] text-sm leading-[1.5]">
                 <li className="flex items-start gap-3">
-                  <span className="text-[var(--primary-cyan)] font-bold text-lg mt-1">•</span>
-                  <span><strong className="text-[var(--text-primary)]">Secure & Private</strong> - Your prescription data is encrypted and never shared</span>
+                  <span className="text-[var(--primary-cyan)] font-bold text-base mt-0.5 flex-shrink-0">•</span>
+                  <span className="break-words"><strong className="text-[var(--text-primary)]">Secure & Private</strong> - Your prescription data is encrypted and never shared</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[var(--primary-cyan)] font-bold text-lg mt-1">•</span>
-                  <span><strong className="text-[var(--text-primary)]">Expert Verified</strong> - All medicine information verified by licensed pharmacists</span>
+                  <span className="text-[var(--primary-cyan)] font-bold text-base mt-0.5 flex-shrink-0">•</span>
+                  <span className="break-words"><strong className="text-[var(--text-primary)]">Expert Verified</strong> - All medicine information verified by licensed pharmacists</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[var(--primary-cyan)] font-bold text-lg mt-1">•</span>
-                  <span><strong className="text-[var(--text-primary)]">24/7 Available</strong> - Get medicine information anytime, anywhere, instantly</span>
+                  <span className="text-[var(--primary-cyan)] font-bold text-base mt-0.5 flex-shrink-0">•</span>
+                  <span className="break-words"><strong className="text-[var(--text-primary)]">24/7 Available</strong> - Get medicine information anytime, anywhere, instantly</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[var(--primary-cyan)] font-bold text-lg mt-1">•</span>
-                  <span><strong className="text-[var(--text-primary)]">Research-Based</strong> - Access medical research details from trusted sources for educational purposes</span>
+                  <span className="text-[var(--primary-cyan)] font-bold text-base mt-0.5 flex-shrink-0">•</span>
+                  <span className="break-words"><strong className="text-[var(--text-primary)]">Research-Based</strong> - Access medical research details from trusted sources for educational purposes</span>
                 </li>
               </ul>
             </div>
 
-            <div className="trust-indicator text-center p-4 bg-gradient-to-r from-[rgba(0,212,170,0.1)] to-[rgba(107,70,193,0.1)] rounded-xl border border-[rgba(0,212,170,0.2)]">
-              <p className="trust-text font-semibold text-[var(--primary-cyan)] text-sm">
+            <div className="trust-indicator text-center p-3 bg-gradient-to-r from-[rgba(0,212,170,0.1)] to-[rgba(107,70,193,0.1)] rounded-xl border border-[rgba(0,212,170,0.2)] mb-6">
+              <p className="trust-text font-semibold text-[var(--primary-cyan)] text-xs break-words">
                 Trusted by over 100,000+ patients worldwide
               </p>
             </div>
 
             {/* Medical Disclaimer Section */}
-            <div className="disclaimer-section mt-8 p-6 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] rounded-xl">
-              <h4 className="disclaimer-title font-['Orbitron'] text-lg font-semibold text-[var(--text-primary)] mb-4 flex items-center gap-2">
+            <div className="disclaimer-section p-4 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] rounded-xl">
+              <h4 className="disclaimer-title font-['Orbitron'] text-base font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-2 break-words">
                 <Shield className="w-5 h-5 text-[rgba(239,68,68,0.8)]" />
                 Medical Disclaimer
               </h4>
-              <div className="disclaimer-content text-[var(--text-secondary)] text-sm leading-[1.6] space-y-3">
-                <p>
+              <div className="disclaimer-content text-[var(--text-secondary)] text-xs leading-[1.5] space-y-2">
+                <p className="break-words">
                   MediLens is designed to assist healthcare professionals and patients with medical information management. This platform is not intended to replace professional medical advice, diagnosis, or treatment.
                 </p>
-                <p>
+                <p className="break-words">
                   Always seek the advice of qualified healthcare providers with any questions regarding medical conditions or treatments.
                 </p>
               </div>
