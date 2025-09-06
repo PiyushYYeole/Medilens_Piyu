@@ -292,6 +292,22 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                 Trusted by over 100,000+ patients worldwide
               </p>
             </div>
+
+            {/* Medical Disclaimer Section */}
+            <div className="disclaimer-section mt-8 p-6 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] rounded-xl">
+              <h4 className="disclaimer-title font-['Orbitron'] text-lg font-semibold text-[var(--text-primary)] mb-4 flex items-center gap-2">
+                <Shield className="w-5 h-5 text-[rgba(239,68,68,0.8)]" />
+                Medical Disclaimer
+              </h4>
+              <div className="disclaimer-content text-[var(--text-secondary)] text-sm leading-[1.6] space-y-3">
+                <p>
+                  MediLens is designed to assist healthcare professionals and patients with medical information management. This platform is not intended to replace professional medical advice, diagnosis, or treatment.
+                </p>
+                <p>
+                  Always seek the advice of qualified healthcare providers with any questions regarding medical conditions or treatments.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
