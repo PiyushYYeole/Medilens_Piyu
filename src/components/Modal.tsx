@@ -271,7 +271,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, type, onSubmit })
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Describe the medical case, symptoms, or ask a specific question about diagnosis, treatment options, or medical procedures..."
+                placeholder="Ask about medications, side effects, dosage, or any health-related questions..."
                 className="question-textarea w-full min-h-[120px] p-4 bg-[rgba(255,255,255,0.08)] border border-[var(--glass-border)] rounded-xl text-[var(--text-primary)] text-base resize-y mb-5 focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)]"
                 autoFocus
               />
@@ -283,7 +283,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, type, onSubmit })
                 className="feature-button flex-1 p-[12px_24px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-[10px] font-semibold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(0,212,170,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <MessageSquare className="w-4 h-4 mr-2 inline" />
-                Get AI Consultation
+                Ask Question
               </button>
               <button
                 type="button"

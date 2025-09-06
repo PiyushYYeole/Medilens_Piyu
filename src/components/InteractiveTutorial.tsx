@@ -36,8 +36,8 @@ const tutorialSteps: TutorialStep[] = [
   {
     id: 'ai-insights',
     targetId: 'ai-consultation-button',
-    title: 'AI Health Insights',
-    description: 'Get instant AI-powered health insights and medical recommendations based on your data.',
+    title: 'Ask Questions',
+    description: 'Get instant answers about medications, side effects, dosage, and health-related questions.',
     position: 'top',
     arrowDirection: 'down'
   },
