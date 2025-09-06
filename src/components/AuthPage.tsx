@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MedicalLogo from './MedicalLogo';
 import { User } from '../App';
 import ThemeToggle from './ThemeToggle';
+import TermsModal from './TermsModal';
 
 interface AuthPageProps {
   onLogin: (user: User) => void;
@@ -20,6 +21,8 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
 
   // Get stored users from localStorage
   const getStoredUsers = (): StoredUser[] => {
@@ -92,6 +95,11 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
 
     try {
       if (activeTab === 'signup') {
+        // Check if terms are accepted
+        if (!acceptedTerms) {
+          throw new Error('You must accept the Terms & Conditions to create an account');
+        }
+
         // Signup validation
         if (!name || name.length < 2) {
           throw new Error('Name must be at least 2 characters long');
@@ -358,9 +366,32 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
             </div>
           )}
 
+          {activeTab === 'signup' && (
+            <div className="terms-checkbox mb-[18px]">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={acceptedTerms}
+                  onChange={(e) => setAcceptedTerms(e.target.checked)}
+                  className="mt-1 w-4 h-4 text-[var(--primary-cyan)] bg-[rgba(255,255,255,0.08)] border border-[var(--glass-border)] rounded focus:ring-[var(--primary-cyan)] focus:ring-2"
+                />
+                <span className="text-sm text-[var(--text-secondary)] leading-[1.4]">
+                  I agree to the{' '}
+                  <button
+                    type="button"
+                    onClick={() => setShowTermsModal(true)}
+                    className="text-[var(--primary-cyan)] hover:text-[var(--text-primary)] transition-colors duration-200 underline font-medium"
+                  >
+                    Terms & Conditions and Privacy Policy
+                  </button>
+                </span>
+              </label>
+            </div>
+          )}
+
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={isLoading || (activeTab === 'signup' && !acceptedTerms)}
             className="auth-button w-full p-4 bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-xl font-['Space_Grotesk'] text-base font-bold tracking-[0.05em] uppercase cursor-pointer transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] mt-2 relative overflow-hidden hover:transform hover:-translate-y-[2px] hover:shadow-[0_15px_40px_rgba(0,212,170,0.4)] active:transform active:translate-y-0 before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(255,255,255,0.2)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           >
             {activeTab === 'login' && 'LOG IN'}
@@ -399,6 +430,12 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
           </div>
         </form>
       </div>
+
+      {/* Terms & Conditions Modal */}
+      <TermsModal
+        isOpen={showTermsModal}
+        onClose={() => setShowTermsModal(false)}
+      />
     </div>
   );
 };
