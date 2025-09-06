@@ -251,6 +251,48 @@ body {
 .particle3 { top: 70%; left: 20%; animation-delay: 4s; }
 .particle4 { top: 50%; right: 10%; animation-delay: 1s; }
 
+/* Visual Guide Animations */
+@keyframes arrowGlow {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(0, 212, 170, 0.8));
+    transform: scale(1);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(0, 212, 170, 1)) drop-shadow(0 0 30px rgba(20, 184, 166, 0.6));
+    transform: scale(1.1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* Visual Guide Responsive Design */
+@media (max-width: 768px) {
+  .visual-guide {
+    left: 20px !important;
+    right: 20px;
+    transform: none !important;
+    width: calc(100% - 40px);
+  }
+  
+  .guide-popup {
+    max-width: none;
+    width: 100%;
+  }
+}
+
 @keyframes particleFloat {
   0% { transform: translateY(0px) scale(1); opacity: 0; }
   10% { opacity: 0.6; }

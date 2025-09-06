@@ -4,6 +4,7 @@ import MedicalLogo from './MedicalLogo';
 import { User } from '../App';
 import Modal from './Modal';
 import ThemeToggle from './ThemeToggle';
+import VisualGuide from './VisualGuide';
 
 interface HomePageProps {
   user: User;
@@ -20,6 +21,7 @@ interface Answer {
 const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [showGuide, setShowGuide] = useState(true);
 
   const handleFeatureClick = (feature: string) => {
     setActiveModal(feature);
@@ -39,6 +41,20 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
     setAnswers(prev => [newAnswer, ...prev]);
     setActiveModal(null);
   };
+
+  const handleDismissGuide = () => {
+    setShowGuide(false);
+    // Store in localStorage to remember user's preference
+    localStorage.setItem('medilens-guide-dismissed', 'true');
+  };
+
+  // Check if guide was previously dismissed
+  React.useEffect(() => {
+    const guideDismissed = localStorage.getItem('medilens-guide-dismissed');
+    if (guideDismissed === 'true') {
+      setShowGuide(false);
+    }
+  }, []);
 
   return (
     <div className="home-page">
@@ -78,6 +94,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
         {/* Feature Cards */}
         <div className="features-grid grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 mb-[50px]">
           <div
+            id="prescription-upload-button"
             className="feature-card bg-[var(--glass-bg)] backdrop-blur-[20px] border border-[var(--glass-border)] rounded-[20px] p-8 text-center transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] cursor-pointer relative overflow-hidden hover:transform hover:-translate-y-2 hover:border-[var(--primary-cyan)] hover:shadow-[0_25px_50px_rgba(0,212,170,0.2)] before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(0,212,170,0.1)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full"
             onClick={() => handleFeatureClick('upload')}
           >
@@ -85,13 +102,13 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
               <Upload className="w-7 h-7 text-white" />
             </div>
             <h3 className="feature-title font-['Orbitron'] text-xl font-semibold text-[var(--text-primary)] mb-3">
-              Medical File Upload
+              Upload Your Doctor's Prescription
             </h3>
             <p className="feature-description text-[var(--text-secondary)] leading-[1.6] mb-5">
-              Securely upload and analyze medical documents, lab results, and imaging files with AI-powered insights
+              Securely upload your doctor's prescription and get AI-powered insights and analysis
             </p>
             <button className="feature-button p-[12px_24px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-[10px] font-semibold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(0,212,170,0.3)]">
-              Upload Files
+              Upload Prescription
             </button>
           </div>
 
@@ -188,6 +205,13 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
         title="AI Medical Consultation"
         type="question"
         onSubmit={handleAskQuestion}
+      />
+
+      {/* Visual Guide */}
+      <VisualGuide
+        targetId="prescription-upload-button"
+        isVisible={showGuide}
+        onDismiss={handleDismissGuide}
       />
     </div>
   );
