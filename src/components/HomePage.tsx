@@ -4,7 +4,7 @@ import MedicalLogo from './MedicalLogo';
 import { User } from '../App';
 import Modal from './Modal';
 import ThemeToggle from './ThemeToggle';
-import VisualGuide from './VisualGuide';
+import InteractiveTutorial from './InteractiveTutorial';
 
 interface HomePageProps {
   user: User;
@@ -21,7 +21,7 @@ interface Answer {
 const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [showGuide, setShowGuide] = useState(true);
+  const [showTutorial, setShowTutorial] = useState(true);
 
   const handleFeatureClick = (feature: string) => {
     setActiveModal(feature);
@@ -42,17 +42,21 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
     setActiveModal(null);
   };
 
-  const handleDismissGuide = () => {
-    setShowGuide(false);
-    // Store in localStorage to remember user's preference
-    localStorage.setItem('medilens-guide-dismissed', 'true');
+  const handleTutorialComplete = () => {
+    setShowTutorial(false);
+    localStorage.setItem('medilens-tutorial-completed', 'true');
   };
 
-  // Check if guide was previously dismissed
+  const handleTutorialSkip = () => {
+    setShowTutorial(false);
+    localStorage.setItem('medilens-tutorial-completed', 'true');
+  };
+
+  // Check if tutorial was previously completed
   React.useEffect(() => {
-    const guideDismissed = localStorage.getItem('medilens-guide-dismissed');
-    if (guideDismissed === 'true') {
-      setShowGuide(false);
+    const tutorialCompleted = localStorage.getItem('medilens-tutorial-completed');
+    if (tutorialCompleted === 'true') {
+      setShowTutorial(false);
     }
   }, []);
 
@@ -66,7 +70,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
             MediLens
           </h1>
         </div>
-        <div className="header-right flex items-center gap-4">
+        <div id="user-profile-section" className="header-right flex items-center gap-4">
           <div className="user-info text-[var(--text-secondary)] text-sm">
             Welcome, {user.name}
           </div>
@@ -113,6 +117,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
           </div>
 
           <div
+            id="medical-research-button"
             className="feature-card bg-[var(--glass-bg)] backdrop-blur-[20px] border border-[var(--glass-border)] rounded-[20px] p-8 text-center transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] cursor-pointer relative overflow-hidden hover:transform hover:-translate-y-2 hover:border-[var(--primary-cyan)] hover:shadow-[0_25px_50px_rgba(0,212,170,0.2)] before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(0,212,170,0.1)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full"
             onClick={() => handleFeatureClick('search')}
           >
@@ -131,6 +136,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
           </div>
 
           <div
+            id="ai-consultation-button"
             className="feature-card bg-[var(--glass-bg)] backdrop-blur-[20px] border border-[var(--glass-border)] rounded-[20px] p-8 text-center transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] cursor-pointer relative overflow-hidden hover:transform hover:-translate-y-2 hover:border-[var(--primary-cyan)] hover:shadow-[0_25px_50px_rgba(0,212,170,0.2)] before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(0,212,170,0.1)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full"
             onClick={() => handleFeatureClick('question')}
           >
@@ -150,7 +156,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
         </div>
 
         {/* Answers Section */}
-        <div className="answers-section bg-[var(--glass-bg)] backdrop-blur-[20px] border border-[var(--glass-border)] rounded-[20px] p-8">
+        <div id="answers-section" className="answers-section bg-[var(--glass-bg)] backdrop-blur-[20px] border border-[var(--glass-border)] rounded-[20px] p-8">
           <div className="answers-header text-center mb-8">
             <h2 className="answers-title font-['Orbitron'] text-[1.8rem] font-semibold text-[var(--text-primary)] mb-2">
               Recent AI Consultations
@@ -207,11 +213,11 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
         onSubmit={handleAskQuestion}
       />
 
-      {/* Visual Guide */}
-      <VisualGuide
-        targetId="prescription-upload-button"
-        isVisible={showGuide}
-        onDismiss={handleDismissGuide}
+      {/* Interactive Tutorial */}
+      <InteractiveTutorial
+        isVisible={showTutorial}
+        onComplete={handleTutorialComplete}
+        onSkip={handleTutorialSkip}
       />
     </div>
   );
