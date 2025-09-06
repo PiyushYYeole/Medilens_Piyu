@@ -42,10 +42,10 @@ const tutorialSteps: TutorialStep[] = [
     arrowDirection: 'down'
   },
   {
-    id: 'medical-research',
-    targetId: 'medical-research-button',
-    title: 'Medical Research Database',
-    description: 'Access comprehensive medical databases and research papers with intelligent search.',
+    id: 'medicine-search',
+    targetId: 'medicine-search-button',
+    title: 'Search Medicine Information',
+    description: 'Search for detailed medicine information including usage, dosage, side effects, and interactions from trusted databases.',
     position: 'top',
     arrowDirection: 'down'
   },

@@ -137,21 +137,21 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
           </div>
 
           <div
-            id="medical-research-button"
+            id="medicine-search-button"
             className="feature-card bg-[var(--glass-bg)] backdrop-blur-[20px] border border-[var(--glass-border)] rounded-[20px] p-8 text-center transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] cursor-pointer relative overflow-hidden hover:transform hover:-translate-y-2 hover:border-[var(--primary-cyan)] hover:shadow-[0_25px_50px_rgba(0,212,170,0.2)] before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-[rgba(0,212,170,0.1)] before:to-transparent before:transition-[left_0.6s_ease] hover:before:left-full"
-            onClick={() => handleFeatureClick('search')}
+            onClick={() => handleFeatureClick('medicine-search')}
           >
             <div className="feature-icon w-[60px] h-[60px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] rounded-2xl flex items-center justify-center mx-auto mb-5 text-[28px]">
               <Search className="w-7 h-7 text-white" />
             </div>
             <h3 className="feature-title font-['Orbitron'] text-xl font-semibold text-[var(--text-primary)] mb-3">
-              Medical Research
+              Search Medicine Information
             </h3>
             <p className="feature-description text-[var(--text-secondary)] leading-[1.6] mb-5">
-              Access comprehensive medical databases and research papers with intelligent search capabilities
+              Search for detailed medicine information including usage, dosage, side effects, and interactions from trusted medical databases
             </p>
             <button className="feature-button p-[12px_24px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-[10px] font-semibold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(0,212,170,0.3)]">
-              Search Database
+              Search Medicine
             </button>
           </div>
 
@@ -219,10 +219,10 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
       />
 
       <Modal
-        isOpen={activeModal === 'search'}
+        isOpen={activeModal === 'medicine-search'}
         onClose={() => setActiveModal(null)}
-        title="Medical Research Database"
-        type="search"
+        title="Search Medicine Information"
+        type="medicine-search"
       />
 
       <Modal

@@ -5,13 +5,13 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  type: 'upload' | 'search' | 'question';
+  type: 'upload' | 'medicine-search' | 'question';
   onSubmit?: (data: string) => void;
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, type, onSubmit }) => {
   const [dragOver, setDragOver] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [medicineQuery, setMedicineQuery] = useState('');
   const [question, setQuestion] = useState('');
   const [uploadTab, setUploadTab] = useState<'file' | 'url'>('file');
   const [urlInput, setUrlInput] = useState('');
@@ -90,9 +90,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, type, onSubmit })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (type === 'search' && searchQuery.trim()) {
-      console.log('Search query:', searchQuery);
-      setSearchQuery('');
+    if (type === 'medicine-search' && medicineQuery.trim()) {
+      console.log('Medicine search query:', medicineQuery);
+      setMedicineQuery('');
       onClose();
     } else if (type === 'question' && question.trim() && onSubmit) {
       onSubmit(question);
@@ -228,27 +228,30 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, type, onSubmit })
           </>
         );
 
-      case 'search':
+      case 'medicine-search':
         return (
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
               <input
                 type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search medical literature, drug interactions, symptoms..."
-                className="search-input w-full p-4 bg-[rgba(255,255,255,0.08)] border border-[var(--glass-border)] rounded-xl text-[var(--text-primary)] text-base mb-5 focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)]"
+                value={medicineQuery}
+                onChange={(e) => setMedicineQuery(e.target.value)}
+                placeholder="Enter medicine name (e.g., Paracetamol, Aspirin, Metformin)..."
+                className="medicine-search-input w-full p-4 bg-[rgba(255,255,255,0.08)] border border-[var(--glass-border)] rounded-xl text-[var(--text-primary)] text-base mb-5 focus:outline-none focus:border-[var(--primary-cyan)] focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)]"
                 autoFocus
               />
+              <p className="text-[var(--text-muted)] text-sm mb-5">
+                Get comprehensive information about medicines including usage instructions, dosage, side effects, contraindications, and drug interactions from trusted medical databases.
+              </p>
             </div>
             <div className="flex gap-3">
               <button
                 type="submit"
-                disabled={!searchQuery.trim()}
+                disabled={!medicineQuery.trim()}
                 className="feature-button flex-1 p-[12px_24px] bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-purple)] text-white border-none rounded-[10px] font-semibold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(0,212,170,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Search className="w-4 h-4 mr-2 inline" />
-                Search Database
+                Search Medicine
               </button>
               <button
                 type="button"
