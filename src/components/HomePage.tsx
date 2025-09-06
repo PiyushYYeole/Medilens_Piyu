@@ -5,6 +5,7 @@ import { User } from '../App';
 import Modal from './Modal';
 import ThemeToggle from './ThemeToggle';
 import InteractiveTutorial from './InteractiveTutorial';
+import WelcomeModal from './WelcomeModal';
 
 interface HomePageProps {
   user: User;
@@ -22,6 +23,8 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [showTutorial, setShowTutorial] = useState(true);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+  const [welcomeSkipped, setWelcomeSkipped] = useState(false);
 
   const handleFeatureClick = (feature: string) => {
     setActiveModal(feature);
@@ -52,11 +55,28 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
     localStorage.setItem('medilens-tutorial-completed', 'true');
   };
 
+  const handleWelcomeClose = () => {
+    setShowWelcomeModal(false);
+  };
+
+  const handleWelcomeSkip = () => {
+    setShowWelcomeModal(false);
+    setWelcomeSkipped(true);
+    sessionStorage.setItem('medilens-welcome-skipped', 'true');
+  };
+
   // Check if tutorial was previously completed
   React.useEffect(() => {
     const tutorialCompleted = localStorage.getItem('medilens-tutorial-completed');
+    const welcomeSkippedSession = sessionStorage.getItem('medilens-welcome-skipped');
+    
     if (tutorialCompleted === 'true') {
       setShowTutorial(false);
+    }
+    
+    if (welcomeSkippedSession === 'true') {
+      setShowWelcomeModal(false);
+      setWelcomeSkipped(true);
     }
   }, []);
 
@@ -214,10 +234,20 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
       />
 
       {/* Interactive Tutorial */}
-      <InteractiveTutorial
-        isVisible={showTutorial}
-        onComplete={handleTutorialComplete}
-        onSkip={handleTutorialSkip}
+      {!showWelcomeModal && (
+        <InteractiveTutorial
+          isVisible={showTutorial}
+          onComplete={handleTutorialComplete}
+          onSkip={handleTutorialSkip}
+        />
+      )}
+
+      {/* Welcome Modal */}
+      <WelcomeModal
+        isOpen={showWelcomeModal}
+        onClose={handleWelcomeClose}
+        onSkip={handleWelcomeSkip}
+        userName={user.name}
       />
     </div>
   );

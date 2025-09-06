@@ -252,6 +252,64 @@ body {
 .particle4 { top: 50%; right: 10%; animation-delay: 1s; }
 
 /* Interactive Tutorial Styles */
+
+/* Welcome Modal Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInScale {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideInScale {
+  animation: slideInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Welcome Modal Responsive */
+@media (max-width: 640px) {
+  .welcome-modal-content {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .welcome-modal-content .inner-content {
+    padding: 1.5rem;
+  }
+  
+  .welcome-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .features-title {
+    font-size: 1.25rem !important;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-buttons button {
+    width: 100%;
+  }
+}
+
 .tutorial-overlay {
   backdrop-filter: blur(2px);
 }
